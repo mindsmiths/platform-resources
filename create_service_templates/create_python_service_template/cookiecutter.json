@@ -1,0 +1,7 @@
+{
+    "service_name": null,
+    "service_name_camel_case": "{{ cookiecutter.service_name.title().replace(' ', '') }}",
+    "service_identifier": "{{ cookiecutter.service_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "service_artifact_name": "{{ cookiecutter.service_name.lower().replace(' ', '-') }}",
+    "_project_slug": null
+}
