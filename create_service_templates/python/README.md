@@ -52,7 +52,7 @@ Note that if you want the new service to communicate with the Rule Engine, you s
     ...
 		<dependency>
 			<groupId>com.mindsmiths</groupId>
-			<artifactId>new-service</artifactId>
+			<artifactId>new-service-client</artifactId>
 			<version>4.0.0a0</version>
 		</dependency>
     ...
