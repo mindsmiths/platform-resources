@@ -9,6 +9,7 @@
 	<name>Rule Engine</name>
     <description>Rule engine</description>
     <version>4.0.0</version>
+    <packaging>kjar</packaging>
 
     <properties>
         <drools.version>7.68.0.Final</drools.version>
@@ -50,6 +51,12 @@
         <finalName>app</finalName>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.kie</groupId>
+                <artifactId>kie-maven-plugin</artifactId>
+                <version>${drools.version}</version>
+                <extensions>true</extensions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
