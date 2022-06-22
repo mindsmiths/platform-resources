@@ -28,7 +28,6 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'test':
         os.environ['MODULE'] = 'test'
 
-    os.environ['PROJECT_NAME'] = '{{cookiecutter._project_name}}'
     os.environ['PROJECT_SLUG'] = '{{cookiecutter._project_slug}}'
     forge.setup('{{cookiecutter.service_identifier}}')
 

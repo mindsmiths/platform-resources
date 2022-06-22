@@ -3,7 +3,6 @@
     "service_identifier": "{{ cookiecutter.service_name.lower().replace(' ', '_') }}",
     "service_artifact_name": "{{ cookiecutter.service_name.lower().replace(' ', '-') }}",
     "local_port": "8001",
-    "_project_name": null,
     "_project_slug": null,
     "_secret_key": null
 }
