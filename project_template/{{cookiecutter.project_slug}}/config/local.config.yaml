@@ -13,7 +13,6 @@ global:
     PULSAR_URL: '{{ env.PULSAR_URL | default("pulsar://localhost:6650", true) }}'
 
   secrets:
-    MONGO_URL: '{{ env.MONGO_URL | default("mongodb://localhost:27017", true) }}'
     MONGO_CLIENT_PASSWORD: '{{ env.MONGO_CLIENT_PASSWORD }}'
 
     POSTGRES_CLIENT_PASSWORD: '{{ env.POSTGRES_CLIENT_PASSWORD | default("postgres", true) }}'

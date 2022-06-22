@@ -1,12 +1,11 @@
 global:
   dependencies:
     python:
-      - forge-sdk==4.0.0a8
+      - forge-sdk==4.0.0a9
       - forge-cli==4.0.0a8
       - cecs==4.0.0a1
       - services/*.py
   env:
-    PROJECT_NAME: '{{cookiecutter.project_name}}'
     PROJECT_SLUG: '{{cookiecutter.project_slug}}'
 
 {% raw %}
@@ -16,9 +15,6 @@ global:
 
     # Messaging
     PULSAR_URL: pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650
-    COMPRESSION_TYPE: LZ4
-    SUBSCRIPTION_TYPE: Shared
-    SUBSCRIPTION_INITIAL_POSITION: Earliest
 
     # Databases
     MONGO_CLIENT_HOST: mongodb:27017
@@ -28,8 +24,6 @@ global:
     POSTGRES_CLIENT_PORT: '5432'
     POSTGRES_CLIENT_USERNAME: postgres
 
-    REDIS_CLIENT_HOST: redis-master
-    REDIS_CLIENT_PORT: '6379'
     REDIS_URL: redis-master:6379
 
     BACKUP_CONTAINER_NAME: '{{ env.BACKUP_CONTAINER_NAME }}'
@@ -37,13 +31,11 @@ global:
 
     # Misc
     DEFAULT_TIME_ZONE: Europe/Zagreb
-    DEFAULT_PROMETHEUS_SCRAPE_PATH: "0.0.0.0"
 
   secrets:
     SENTRY_DSN: '{{ env.SENTRY_DSN }}'
 
     MONGO_CLIENT_PASSWORD: admin
-    MONGO_URL: mongodb://root:admin@mongodb:27017
     POSTGRES_CLIENT_PASSWORD: admin
 
     BACKUPS_STORAGE_ACCOUNT_KEY: '{{ env.BACKUPS_STORAGE_ACCOUNT_KEY }}'
@@ -81,6 +73,8 @@ services:
       HEARTBEAT_CYCLE: 30
     db:
       mongo: true
+    dependencies:
+      - rule-engine-api==4.0.0a20
     resources:
       cpu: 69m
       memory: 65Mi
@@ -91,6 +85,8 @@ services:
     version: 4.0.0a4
     db:
       mongo: true
+    dependencies:
+      - rule-engine-api==4.0.0a20
     resources:
       cpu: 84m
       memory: 94Mi
