@@ -4,7 +4,7 @@
 ## [4.0.0a1] - 2022-08-10
 
 ### Changed
-- renamed `{{cookiecutter.project_slug}}` to `{{cookiecutter.project_repo_name}}`
+- renamed project folder to `{{cookiecutter.project_repo_name}}`
 - added `*.log` and `*.err` to `.gitignore`
 - removed `package.json` from `.gitignore`
 
