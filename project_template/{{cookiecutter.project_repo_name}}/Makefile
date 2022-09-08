@@ -16,4 +16,4 @@ format:
 	yapf --style setup.cfg -r -i .
 
 type-check:
-	cd .. && mypy --config-file={{cookiecutter.project_repo_name}}/setup.cfg -p {{cookiecutter.project_repo_name}}
+	cd .. && mypy --config-file=$(shell basename $(CURDIR))/setup.cfg -p $(shell basename $(CURDIR))

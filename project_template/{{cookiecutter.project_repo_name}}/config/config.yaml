@@ -1,20 +1,21 @@
 global:
   dependencies:
     python:
-      - forge-sdk==4.0.0a9
-      - forge-cli==4.0.0a8
-      - cecs==4.0.0a1
+      - forge-sdk==4.0.0a11
+      - forge-cli==4.0.0a25
+      - cecs==4.0.0a3
       - services/*.py
   env:
     PROJECT_SLUG: '{{cookiecutter.project_slug}}'
 
 {% raw %}
-    ENVIRONMENT_NAME: {{ env.CI_COMMIT_REF_SLUG }}
+    ENVIRONMENT_NAME: {{ env.ENVIRONMENT_NAME }}
     MODULE: '{{ env.MODULE | default("local", True) }}'
     LOG_LEVEL: DEBUG
 
     # Messaging
     PULSAR_URL: pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650
+    PULSAR_ENDPOINT_URL: http://pulsar-proxy.pulsar.svc.cluster.local
 
     # Databases
     MONGO_CLIENT_HOST: mongodb:27017
