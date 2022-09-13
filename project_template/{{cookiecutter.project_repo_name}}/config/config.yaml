@@ -1,8 +1,8 @@
 global:
   dependencies:
     python:
-      - forge-sdk==4.0.0a11
-      - forge-cli==4.0.0a25
+      - forge-sdk==4.0.0a12
+      - forge-cli==4.0.0a26
       - cecs==4.0.0a3
       - services/*.py
   env:
@@ -25,7 +25,8 @@ global:
     POSTGRES_CLIENT_PORT: '5432'
     POSTGRES_CLIENT_USERNAME: postgres
 
-    REDIS_URL: redis-master:6379
+    REDIS_CLIENT_HOST: redis-master
+    REDIS_CLIENT_PORT: '6379'
 
     BACKUP_CONTAINER_NAME: '{{ env.BACKUP_CONTAINER_NAME }}'
     BACKUPS_STORAGE_ACCOUNT_NAME: '{{ env.BACKUPS_STORAGE_ACCOUNT_NAME }}'
@@ -75,7 +76,7 @@ services:
     db:
       mongo: true
     dependencies:
-      - rule-engine-api==4.0.0a20
+      - rule-engine-api==4.0.0a21
     resources:
       cpu: 69m
       memory: 65Mi
@@ -87,7 +88,7 @@ services:
     db:
       mongo: true
     dependencies:
-      - rule-engine-api==4.0.0a20
+      - rule-engine-api==4.0.0a21
     resources:
       cpu: 84m
       memory: 94Mi
