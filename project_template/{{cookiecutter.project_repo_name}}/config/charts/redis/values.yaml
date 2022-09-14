@@ -1,3 +1,4 @@
+{% raw -%}
 enabled: true
 usePassword: false
 cluster:
@@ -21,3 +22,4 @@ master:
 replica:
   enabled: false
   replicaCount: 0
+{% endraw -%}

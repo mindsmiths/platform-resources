@@ -1,3 +1,4 @@
+{% raw -%}
 enabled: true
 fullnameOverride: postgresql
 auth:
@@ -14,3 +15,4 @@ primary:
       operator: "Equal"
       value: '{{ env.CI_PROJECT_NAME }}-{{ env.CI_COMMIT_REF_SLUG }}'
       effect: "NoSchedule"
+{% endraw -%}

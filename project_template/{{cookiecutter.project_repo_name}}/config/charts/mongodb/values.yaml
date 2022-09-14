@@ -1,3 +1,4 @@
+{% raw -%}
 enabled: true
 fullnameOverride: mongodb
 auth:
@@ -13,3 +14,4 @@ tolerations:
     operator: "Equal"
     value: '{{ env.CI_PROJECT_NAME }}-{{ env.CI_COMMIT_REF_SLUG }}'
     effect: "NoSchedule"
+{% endraw -%}
