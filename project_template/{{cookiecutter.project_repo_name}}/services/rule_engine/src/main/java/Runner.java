@@ -1,7 +1,6 @@
 import agents.Smith;
 import com.mindsmiths.ruleEngine.runner.RuleEngineService;
 import com.mindsmiths.ruleEngine.util.Agents;
-import com.mindsmiths.ruleEngine.util.Signals;
 
 
 public class Runner extends RuleEngineService {

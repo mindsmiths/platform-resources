@@ -4,7 +4,7 @@
 TODO
 
 ## Prerequisites
-To set the initial state of the project just run `forge init`. This will install prerequisites, build the services and prepare the databases.
+To set the initial state of the project just run `forge init`. This will install prerequisites and build the project.
 
 ## Get ready to rumble!
 To start playing, just run `forge run`.

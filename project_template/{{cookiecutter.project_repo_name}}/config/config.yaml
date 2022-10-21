@@ -1,8 +1,8 @@
 global:
   dependencies:
     python:
-      - forge-sdk==4.0.0a12
-      - forge-cli==4.0.0a26
+      - forge-sdk==5.0.0b0
+      - forge-cli==5.0.0b0
       - cecs==4.0.0a3
       - services/*.py
   env:
@@ -11,7 +11,7 @@ global:
 {% raw %}
     ENVIRONMENT_NAME: {{ env.ENVIRONMENT_NAME }}
     MODULE: '{{ env.MODULE | default("local", True) }}'
-    LOG_LEVEL: DEBUG
+    LOG_LEVEL: INFO
 
     # Messaging
     PULSAR_URL: pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650
@@ -37,6 +37,7 @@ global:
   secrets:
     SENTRY_DSN: '{{ env.SENTRY_DSN }}'
 
+    MONGO_CLIENT_CONNECTION_STRING: {{ env.MONGO_CLIENT_CONNECTION_STRING }}
     MONGO_CLIENT_PASSWORD: admin
     POSTGRES_CLIENT_PASSWORD: admin
 
@@ -67,29 +68,17 @@ services:
       cpu: 500m
       memory: 650Mi
 
-  heartbeat-scheduler:
+  heartbeat:
     package: heartbeat
     type: python
-    version: 4.0.0a4
+    version: 5.0.0b0
     env:
       HEARTBEAT_CYCLE: 30
     db:
       mongo: true
     dependencies:
-      - rule-engine-api==4.0.0a21
+      - rule-engine-api==5.0.0b0
     resources:
       cpu: 69m
       memory: 65Mi
-
-  heartbeat-sender:
-    package: heartbeat
-    type: python
-    version: 4.0.0a4
-    db:
-      mongo: true
-    dependencies:
-      - rule-engine-api==4.0.0a21
-    resources:
-      cpu: 84m
-      memory: 94Mi
 {% endraw %}

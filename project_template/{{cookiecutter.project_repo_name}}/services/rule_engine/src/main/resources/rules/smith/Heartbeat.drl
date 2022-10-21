@@ -1,4 +1,4 @@
-package rules.Smith;
+package rules.smith;
 
 import com.mindsmiths.ruleEngine.model.Heartbeat;
 import com.mindsmiths.ruleEngine.util.Log;

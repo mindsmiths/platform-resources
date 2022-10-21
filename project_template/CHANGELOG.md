@@ -1,18 +1,11 @@
 # Project template CHANGELOG
 
 
-## [4.0.0a1] - 2022-08-10
-
-### Changed
-- renamed project folder to `{{cookiecutter.project_repo_name}}`
-- added `*.log` and `*.err` to `.gitignore`
-- removed `package.json` from `.gitignore`
-
-
-## [4.0.0a0] - 2022-06-21
+## [1.5.0 beta] - 2022-10-21
 
 ### Added
 - initial version
+
 
 ------------------------------------------------------------
 
