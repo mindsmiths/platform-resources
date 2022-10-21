@@ -1,6 +1,6 @@
 package com.mindsmiths.{{cookiecutter.service_name_camel_case.lower()}};
 
-import java.io.Serializable;
+import com.mindsmiths.sdk.core.api.Message;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoSomethingPayload implements Serializable {
+public class DoSomething extends Message {
     private String someData;  // TODO: change this
 }

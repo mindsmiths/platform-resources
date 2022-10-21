@@ -1,5 +1,5 @@
-from forge.core.models import ExtendableModel
+from forge.core.api.base import Reply
 
 
-class Result(ExtendableModel):  # TODO: change this
+class Result(Reply):  # TODO: change this
     success: bool

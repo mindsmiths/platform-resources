@@ -21,7 +21,7 @@ config['services']['{{cookiecutter.service_artifact_name}}'] = {
     "env": {
         "DJANGO_SUPERUSER_USERNAME": "admin",
         "DJANGO_SUPERUSER_PASSWORD": "{{'{{'}} env.{{cookiecutter.service_identifier.upper()}}_ADMIN_PASSWORD | default(\"admin\") {{'}}'}}",
-        "SITE_URL": "{{'{{'}} env.{{cookiecutter.service_identifier.upper()}}_URL {{'}}'}}",
+        "SITE_URL": "{{'{{'}} \"{{cookiecutter.service_artifact_name}}.\" + env.get(\"HOST_DOMAIN\", \"\") {{'}}'}}",
         "INTERNAL_SITE_URL": "http://{{cookiecutter.service_artifact_name}}",
         "SECRET_KEY": "{{cookiecutter._secret_key}}",
     },

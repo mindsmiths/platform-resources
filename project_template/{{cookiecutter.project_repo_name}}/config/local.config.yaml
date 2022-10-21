@@ -1,4 +1,4 @@
-{% raw %}
+{% raw -%}
 global:
   env:
     PULSAR_URL: {{ env.PULSAR_URL }}

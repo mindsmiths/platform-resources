@@ -1,1 +1,1 @@
-SERVICE_NAME = '{{cookiecutter.service_identifier}}'
+SERVICE_ID = '{{cookiecutter.service_identifier}}'

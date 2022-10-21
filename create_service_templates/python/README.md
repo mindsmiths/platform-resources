@@ -53,13 +53,11 @@ Note that if you want the new service to communicate with the Rule Engine, you s
 		<dependency>
 			<groupId>com.mindsmiths</groupId>
 			<artifactId>new-service-client</artifactId>
-			<version>4.0.0a0</version>
+			<version>latest</version>
 		</dependency>
     ...
 </dependencies>
 ```
-
-You need to run `forge install` from the terminal to finish connecting the services after adding the dependency.
 
 
 ## Service configuration
