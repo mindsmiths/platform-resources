@@ -16,4 +16,8 @@ tolerations:
     effect: "NoSchedule"
 architecture: standalone
 useStatefulSet: true
+readinessProbe:
+  periodSeconds: 120
+livenessProbe:
+  periodSeconds: 180
 {% endraw -%}

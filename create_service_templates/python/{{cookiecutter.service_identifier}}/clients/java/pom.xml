@@ -9,7 +9,6 @@
     <version>latest</version>
 
     <properties>
-        <jackson.version>2.13.1</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -25,7 +24,7 @@
         <dependency>
             <groupId>com.mindsmiths</groupId>
             <artifactId>forge-sdk</artifactId>
-            <version>5.0.0b0</version>
+            <version>5.0.0</version>
         </dependency>
     </dependencies>
 
