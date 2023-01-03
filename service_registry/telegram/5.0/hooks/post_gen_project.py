@@ -24,10 +24,10 @@ def setup():
     if not os.path.exists("../.env"):
         with open("../.env", 'x'):
             pass
-    secrets = Secrets.load()
+    secrets = Secrets.load('../.env')
     secrets.add_blank_line()
     secrets['TELEGRAM_BOT_TOKEN'] = token
-    secrets.dump()
+    secrets.dump('../.env', '../.env.example')
 
     # Update pom.xml
     project_xml = ProjectXML("../services/rule_engine/pom.xml")
