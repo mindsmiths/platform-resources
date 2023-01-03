@@ -14,10 +14,12 @@ def setup():
     with open('../config/config.yaml', 'r') as f:
         data = load_yaml(f.read())
         data['services'].update(config_update)
-        data['services']['rule-engine']['dependencies'] = [
-            *data['services']['rule-engine'].get('dependencies', []),
-            'telegram-adapter'
-        ]
+
+        if 'telegram-adapter' not in data['services']['rule-engine'].get('dependencies', []):
+            data['services']['rule-engine']['dependencies'] = [
+                *data['services']['rule-engine'].get('dependencies', []),
+                'telegram-adapter'
+            ]
     dump_yaml(data, '../config/config.yaml')
 
     # Update secrets
@@ -54,7 +56,6 @@ def setup():
         dump_yaml(yaml, signal_path)
 
     shutil.rmtree('../{{cookiecutter._service_name}}')
-    print("Service successfully set up.")
 
 
 SIGNAL_UPDATE = """
