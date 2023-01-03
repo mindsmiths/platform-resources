@@ -1,0 +1,12 @@
+package rules.{{cookiecutter.agent_name_camel}};
+
+import com.mindsmiths.ruleEngine.model.Heartbeat;
+import com.mindsmiths.ruleEngine.util.Log;
+
+
+rule "Heartbeat"
+    when
+        Heartbeat() from entry-point "signals"
+    then
+        Log.info("{{cookiecutter.agent_name}}'s heartbeat");
+end
