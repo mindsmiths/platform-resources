@@ -14,6 +14,7 @@ services:
     versions:
       5.0.0:
         dependencies: []
+        templateDir: telegram/5.0
         compatibility:
           - ~=5.0
         releasedAt: 2021-12-31T15:00:00Z

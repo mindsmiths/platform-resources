@@ -1,9 +1,8 @@
 import os
+import shutil
 
 from forge.utils.templating import render
 from forge_cli.utils import load_yaml, dump_yaml, Secrets, ProjectXML
-
-version = '5.0.0'
 
 
 def setup():
@@ -11,19 +10,19 @@ def setup():
     agent = input('Which agent will handle messages?: ')
 
     # Update config
-    config_update = load_yaml(render(CONFIG_UPDATE, {'version': version}))
-    with open('config/config.yaml', 'r') as f:
+    config_update = load_yaml(CONFIG_UPDATE)
+    with open('../config/config.yaml', 'r') as f:
         data = load_yaml(f.read())
         data['services'].update(config_update)
         data['services']['rule-engine']['dependencies'] = [
             *data['services']['rule-engine'].get('dependencies', []),
             'telegram-adapter'
         ]
-    dump_yaml(data, 'config/config.yaml')
+    dump_yaml(data, '../config/config.yaml')
 
     # Update secrets
-    if not os.path.exists(".env"):
-        with open(".env", 'x'):
+    if not os.path.exists("../.env"):
+        with open("../.env", 'x'):
             pass
     secrets = Secrets.load()
     secrets.add_blank_line()
@@ -31,16 +30,16 @@ def setup():
     secrets.dump()
 
     # Update pom.xml
-    project_xml = ProjectXML("services/rule_engine/pom.xml")
+    project_xml = ProjectXML("../services/rule_engine/pom.xml")
     project_xml.add_xml_dependency({
         "groupId": "com.mindsmiths",
         "artifactId": "telegram-adapter-client",
-        "version": version
+        "version": '{{cookiecutter._service_version}}'
     })
 
     # Update signals.yaml
     if agent:
-        signal_path = "services/rule_engine/src/main/resources/config/signals.yaml"
+        signal_path = "../services/rule_engine/src/main/resources/config/signals.yaml"
 
         os.makedirs(os.path.dirname(signal_path), exist_ok=True)
         if not os.path.exists(signal_path):
@@ -54,6 +53,7 @@ def setup():
                 yaml = yaml_update
         dump_yaml(yaml, signal_path)
 
+    shutil.rmtree('../{{cookiecutter._service_name}}')
     print("Service successfully set up.")
 
 
@@ -62,13 +62,13 @@ com.mindsmiths.telegramAdapter.events.TelegramReceivedMessage:
   - !GetOrCreateAgentByConnection
     connectionName: telegram
     connectionField: chatId
-    agentType: agents.{{agent}}
+    agentType: agents.{{'{{agent}}'}}
 """
 
 CONFIG_UPDATE = """
 telegram-adapter:
   type: python
-  version: {{version}}
+  version: {{cookiecutter._service_version}}
   db:
     mongo: true
   env:
@@ -77,3 +77,6 @@ telegram-adapter:
     cpu: 81m
     memory: 130Mi
 """
+
+if __name__ == '__main__':
+    setup()
