@@ -1,6 +1,13 @@
 # Project template CHANGELOG
 
 
+## [1.5.1] - 2023-01-11
+
+### Changed
+- upgraded versions to Platform 1.5.1
+- `MODULE` renamed to `ENVIRONMENT` (since `MODULE` is deprecated)
+
+
 ## [1.5.0] - 2022-12-21
 
 ### Changed

@@ -1,15 +1,15 @@
 global:
   dependencies:
     python:
-      - forge-sdk==5.0.0
-      - forge-cli==5.0.0
-      - cecs==5.0.0
+      - forge-sdk==5.0.2
+      - forge-cli==5.0.1
+      - cecs==5.0.1
       - services/*.py
   env:
     PROJECT_SLUG: '{{cookiecutter.project_slug}}'
 {% raw %}
     ENVIRONMENT_NAME: {{ env.ENVIRONMENT_NAME }}
-    MODULE: '{{ env.MODULE | default("local", True) }}'
+    ENVIRONMENT: '{{ env.ENVIRONMENT | default("local", True) }}'
     LOG_LEVEL: INFO
 
     # Messaging
@@ -72,7 +72,7 @@ services:
   heartbeat:
     package: heartbeat
     type: python
-    version: 5.0.0
+    version: 5.0.1
     env:
       HEARTBEAT_CYCLE: 30
     db:
