@@ -7,4 +7,4 @@ test:
 	forge test
 
 type-check:
-	cd .. && mypy -p $(shell basename $(CURDIR)) --ignore-missing-imports --check-untyped-defs --install-types --python-version 3.8
+	cd .. && mypy -p $(shell basename $(CURDIR)) --ignore-missing-imports --check-untyped-defs --python-version 3.8
