@@ -3,6 +3,8 @@ package rules.{{cookiecutter.agent_name_camel}};
 import com.mindsmiths.ruleEngine.model.Heartbeat;
 import com.mindsmiths.ruleEngine.util.Log;
 
+import agents.{{cookiecutter.agent_name_pascal}};
+
 
 rule "Heartbeat"
     when
