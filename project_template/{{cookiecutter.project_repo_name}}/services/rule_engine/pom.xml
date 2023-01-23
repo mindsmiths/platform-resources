@@ -8,8 +8,7 @@
 
 	<name>Rule Engine</name>
     <description>Rule engine</description>
-    <version>5.0.1</version>
-    <packaging>kjar</packaging>
+    <version>5.0.0</version>
 
     <properties>
         <drools.version>7.73.0.Final</drools.version>
@@ -43,7 +42,7 @@
         <dependency>
             <groupId>com.mindsmiths</groupId>
             <artifactId>rule-engine</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
         </dependency>
     </dependencies>
 
