@@ -1,6 +1,12 @@
 # Project template CHANGELOG
 
 
+## [1.5.4] - 2023-03-13
+
+### Changed
+- upgraded versions to Platform 1.5.4
+
+
 ## [1.5.3] - 2023-02-02
 
 ### Changed

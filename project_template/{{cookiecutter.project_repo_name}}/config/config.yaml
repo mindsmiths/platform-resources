@@ -1,9 +1,9 @@
 global:
   dependencies:
     python:
-      - forge-sdk==5.0.4
-      - forge-cli==5.0.4
-      - cecs==5.0.1
+      - forge-sdk==5.0.6
+      - forge-cli==5.0.7
+      - cecs==5.0.2
       - services/*.py
   env:
     PROJECT_SLUG: '{{cookiecutter.project_slug}}'
@@ -72,13 +72,13 @@ services:
   heartbeat:
     package: heartbeat
     type: python
-    version: 5.0.1
+    version: 5.0.4
     env:
       HEARTBEAT_CYCLE: 30
     db:
       mongo: true
     dependencies:
-      - rule-engine-api==5.0.3
+      - rule-engine-api==5.0.6
     resources:
       cpu: 69m
       memory: 65Mi
