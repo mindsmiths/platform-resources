@@ -92,7 +92,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(APPS_DIR.path('templates')),
+            str(ROOT_DIR.path('frontend', 'dist')),
+            str(APPS_DIR.path('templates'))
         ],
         'OPTIONS': {
             'loaders': [
@@ -116,7 +117,7 @@ TEMPLATES = [
 STATIC_ROOT = '/var/www/assets/static'
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [str(APPS_DIR.path('static'))]
+STATICFILES_DIRS = [str(ROOT_DIR.path('frontend', 'dist', 'static'))]
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
