@@ -1,8 +1,8 @@
 global:
   dependencies:
     python:
-      - forge-sdk==5.0.6
-      - forge-cli==5.0.7
+      - forge-sdk==5.0.7
+      - forge-cli==5.0.8
       - cecs==5.0.2
       - services/*.py
   env:
@@ -78,7 +78,7 @@ services:
     db:
       mongo: true
     dependencies:
-      - rule-engine-api==5.0.6
+      - rule-engine-api==5.0.8
     resources:
       cpu: 69m
       memory: 65Mi

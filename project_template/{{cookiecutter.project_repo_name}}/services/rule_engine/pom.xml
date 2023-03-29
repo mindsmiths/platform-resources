@@ -8,7 +8,7 @@
 
     <name>Rule Engine</name>
     <description>Rule engine</description>
-    <version>5.0.6</version>
+    <version>1.0.0</version>
     <packaging>kjar</packaging>
 
     <properties>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>com.mindsmiths</groupId>
             <artifactId>rule-engine</artifactId>
-            <version>5.0.6</version>
+            <version>5.0.8</version>
         </dependency>
     </dependencies>
 
@@ -112,6 +112,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <systemPropertyVariables>
+                        <projectSlug>{{cookiecutter.project_slug}}</projectSlug>
                         <buildDirectory>${project.build.directory}</buildDirectory>
                     </systemPropertyVariables>
                     <useSystemClassLoader>false</useSystemClassLoader>

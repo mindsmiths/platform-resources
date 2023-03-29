@@ -1,0 +1,12 @@
+{
+  "agentId": "SMITH",
+  "facts": {
+    "agents#Smith": {
+      "SMITH": {
+        "id": "SMITH",
+        "connections": {},
+        "type": "Smith"
+      }
+    }
+  }
+}

@@ -1,6 +1,15 @@
 # Project template CHANGELOG
 
 
+## [1.5.5] - 2023-03-29
+
+### Added
+- added agent test examples
+
+### Changed
+- upgraded versions to Platform 1.5.5
+
+
 ## [1.5.4] - 2023-03-13
 
 ### Changed
