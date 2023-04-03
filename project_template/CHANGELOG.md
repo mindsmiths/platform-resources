@@ -1,5 +1,10 @@
 # Project template CHANGELOG
 
+## [1.5.6] - 2023-03-30
+
+### Fixed
+- postgres resource requests
+- backups enabled by default only on production
 
 ## [1.5.5] - 2023-03-29
 

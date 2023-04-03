@@ -43,17 +43,6 @@ global:
     BACKUPS_STORAGE_ACCOUNT_KEY: '{{ env.BACKUPS_STORAGE_ACCOUNT_KEY }}'
     BACKUPS_ZIP_ENCRYPT: '{{ env.BACKUPS_ZIP_ENCRYPT }}'
 
-  backups:
-    mongo:
-      enabled: true
-      cron: 3 5,17 * * *
-    postgres:
-      enabled: true
-      cron: 8 5,17 * * *
-    redis:
-      enabled: true
-      cron: 13 5,17 * * *
-
   cecs:
     params: -e venv
 
