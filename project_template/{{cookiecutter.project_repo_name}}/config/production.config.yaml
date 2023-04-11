@@ -9,3 +9,9 @@ global:
     redis:
       enabled: true
       cron: 13 5,17 * * *
+
+services:
+
+  rule-engine:
+    env:
+      JDK_JAVA_OPTIONS: -XX:MaxHeapSize=300M

@@ -1,10 +1,20 @@
 # Project template CHANGELOG
 
-## [1.5.6] - 2023-03-30
+
+## [1.6.0] - 2023-04-11
+
+### Added
+- control panel (beta)
+- rule engine RAM fix (heap limit)
 
 ### Fixed
 - postgres resource requests
 - backups enabled by default only on production
+
+### Changed
+- upgraded `forge-cli` to `5.0.9`
+- upgraded `forge-sdk` to `5.0.8`
+
 
 ## [1.5.5] - 2023-03-29
 

@@ -1,8 +1,8 @@
 global:
   dependencies:
     python:
-      - forge-sdk==5.0.7
-      - forge-cli==5.0.8
+      - forge-sdk==5.0.8
+      - forge-cli==5.0.9
       - cecs==5.0.2
       - services/*.py
   env:
@@ -71,4 +71,25 @@ services:
     resources:
       cpu: 69m
       memory: 65Mi
+
+  control-panel:
+    type: django
+    version: 0.0.1
+    https: true
+    db:
+      postgres: true
+    image:
+      static: true
+    env:
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_PASSWORD: '{{ env.CONTROL_PANEL_ADMIN_PASSWORD | default("admin") }}'
+      SITE_URL: '{{ "control-panel." + env.get("HOST_DOMAIN", "") }}'
+      INTERNAL_SITE_URL: http://control-panel
+      SECRET_KEY: KiOx1YWV1AaDdXmj6PdiFdsXi9iiGUghYskxeUxAQSAEODkB4E
+      REPO: 'https://commit-bot:{{ env.COMMIT_TOKEN }}@{{ env.get("CI_REPOSITORY_URL", "").split("@")[1] }}'
+      BRANCH: '{{ env.CI_COMMIT_BRANCH }}'
+      DATA_HASH: '{{ file_hash("services/control_panel/configuration.yaml") }}'
+    resources:
+      cpu: 25m
+      memory: 150Mi
 {% endraw %}

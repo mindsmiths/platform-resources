@@ -14,9 +14,18 @@ global:
     REDIS_CLIENT_HOST: {{ env.REDIS_CLIENT_HOST }}
     REDIS_CLIENT_PORT: {{ env.REDIS_CLIENT_PORT }}
 
+    INTERNAL_CONTROL_PANEL_URL: '{{ env.CONTROL_PANEL_URL | default("http://localhost:8100", true) }}'
+
   secrets:
     MONGO_CLIENT_CONNECTION_STRING: {{ env.MONGO_CLIENT_CONNECTION_STRING }}
     MONGO_CLIENT_PASSWORD: {{ env.MONGO_CLIENT_PASSWORD }}
 
     POSTGRES_CLIENT_PASSWORD: {{ env.POSTGRES_CLIENT_PASSWORD }}
+
+services:
+
+  control-panel:
+    port: 8100
+    env:
+      SITE_URL: '{{ env.CONTROL_PANEL_URL | default("http://localhost:8100", true) }}'
 {% endraw %}
