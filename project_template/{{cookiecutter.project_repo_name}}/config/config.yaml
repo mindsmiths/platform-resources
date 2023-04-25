@@ -1,8 +1,8 @@
 global:
   dependencies:
     python:
-      - forge-sdk==5.0.8
-      - forge-cli==5.0.9
+      - forge-sdk==5.0.9
+      - forge-cli==5.0.10
       - cecs==5.0.2
       - services/*.py
   env:
@@ -74,7 +74,7 @@ services:
 
   control-panel:
     type: django
-    version: 0.0.1
+    version: 0.0.3
     https: true
     db:
       postgres: true

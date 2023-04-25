@@ -13,6 +13,6 @@ public class TestSmithWithSummary extends AgentTest {
     @Test
     public void testHeartbeat() {
         AgentTestResult<Smith> result = runFromSummary("smith/test_heartbeat.json");
-        assertTrue(result.getRulesFired().contains("Heartbeat"));
+        result.assertRuleFired("Heartbeat");
     }
 }

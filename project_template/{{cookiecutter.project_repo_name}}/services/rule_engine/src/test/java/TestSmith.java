@@ -17,6 +17,6 @@ public class TestSmith extends AgentTest {
     @Test
     public void testHeartbeat() {
         AgentTestResult<Smith> result = run(new Smith(), List.of());
-        assertTrue(result.getRulesFired().contains("Heartbeat"));
+        result.assertRuleFired("Heartbeat");
     }
 }
