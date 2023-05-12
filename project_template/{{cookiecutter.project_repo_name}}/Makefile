@@ -1,7 +1,7 @@
 lint:
 	flake8 . \
 	 --max-line-length=120 \
-	 --exclude=__pycache__,.eggs,*.egg,*venv*/
+	 --exclude=__pycache__,.eggs,*.egg,*venv*/,migrations
 
 test:
 	forge test
