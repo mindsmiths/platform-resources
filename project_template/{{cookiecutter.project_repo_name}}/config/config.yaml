@@ -15,8 +15,6 @@ global:
     DEFAULT_TIME_ZONE: Europe/Zagreb
 
   secrets:
-    SENTRY_DSN: '{{ env.SENTRY_DSN }}'
-
     MONGO_CLIENT_PASSWORD: admin
     POSTGRES_CLIENT_PASSWORD: admin
 
