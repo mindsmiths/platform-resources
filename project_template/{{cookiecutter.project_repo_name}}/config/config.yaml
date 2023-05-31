@@ -13,9 +13,6 @@ global:
     # Misc
     DEFAULT_TIME_ZONE: Europe/Zagreb
 
-  secrets:
-    MONGO_CLIENT_PASSWORD: admin
-    POSTGRES_CLIENT_PASSWORD: admin
 
   cecs:
     params: -e venv

@@ -3,10 +3,6 @@ global:
   env:
     INTERNAL_CONTROL_PANEL_URL: '{{ env.CONTROL_PANEL_URL | default("http://localhost:8100", true) }}'
 
-  secrets:
-    MONGO_CLIENT_PASSWORD: {{ env.MONGO_CLIENT_PASSWORD }}
-    POSTGRES_CLIENT_PASSWORD: {{ env.POSTGRES_CLIENT_PASSWORD }}
-
 services:
 
   control-panel:
