@@ -8,40 +8,11 @@ global:
   env:
     PROJECT_SLUG: '{{cookiecutter.project_slug}}'
 {% raw %}
-    ENVIRONMENT_NAME: {{ env.ENVIRONMENT_NAME }}
-    ENVIRONMENT: '{{ env.ENVIRONMENT | default("local", True) }}'
     LOG_LEVEL: INFO
-
-    # Messaging
-    PULSAR_URL: pulsar://pulsar-proxy.pulsar.svc.cluster.local:6650
-    PULSAR_ENDPOINT_URL: http://pulsar-proxy.pulsar.svc.cluster.local
-
-    # Databases
-    MONGO_CLIENT_HOST: mongodb:27017
-    MONGO_CLIENT_USERNAME: root
-
-    POSTGRES_CLIENT_HOST: postgresql
-    POSTGRES_CLIENT_PORT: '5432'
-    POSTGRES_CLIENT_USERNAME: postgres
-
-    REDIS_CLIENT_HOST: redis-master
-    REDIS_CLIENT_PORT: '6379'
-
-    BACKUP_CONTAINER_NAME: '{{ env.BACKUP_CONTAINER_NAME }}'
-    BACKUPS_STORAGE_ACCOUNT_NAME: '{{ env.BACKUPS_STORAGE_ACCOUNT_NAME }}'
 
     # Misc
     DEFAULT_TIME_ZONE: Europe/Zagreb
 
-  secrets:
-    SENTRY_DSN: '{{ env.SENTRY_DSN }}'
-
-    MONGO_CLIENT_CONNECTION_STRING: '{{ env.MONGO_CLIENT_CONNECTION_STRING }}'
-    MONGO_CLIENT_PASSWORD: admin
-    POSTGRES_CLIENT_PASSWORD: admin
-
-    BACKUPS_STORAGE_ACCOUNT_KEY: '{{ env.BACKUPS_STORAGE_ACCOUNT_KEY }}'
-    BACKUPS_ZIP_ENCRYPT: '{{ env.BACKUPS_ZIP_ENCRYPT }}'
 
   cecs:
     params: -e venv
