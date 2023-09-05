@@ -27,7 +27,7 @@ config['services']['{{cookiecutter.service_artifact_name}}'] = {
     },
     "resources": {
         "cpu": "100m",
-        "memory": "400Mi"
+        "memory": "300Mi"
     }
 }
 
