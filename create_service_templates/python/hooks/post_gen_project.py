@@ -1,11 +1,12 @@
 import shutil
 
-from forge_cli.utils import load_templated_yaml, dump_templated_yaml
+from forge_cli.utils import get_templated_yaml_loader
 
+yaml = get_templated_yaml_loader()
 
 # Inject service's config in the config/config.yaml
 with open('../config/config.yaml', 'r') as f:
-    config = load_templated_yaml(f.read())
+    config = yaml.load(f.read())
 
 config['services']['{{cookiecutter.service_artifact_name}}'] = {
     "type": "python",
@@ -18,7 +19,7 @@ config['services']['{{cookiecutter.service_artifact_name}}'] = {
     }
 }
 
-dump_templated_yaml(config, '../config/config.yaml')
+yaml.dump(config, '../config/config.yaml')
 
 # Move service's directory with its files to project/services
 shutil.move('../{{cookiecutter.service_identifier}}', '../services')
