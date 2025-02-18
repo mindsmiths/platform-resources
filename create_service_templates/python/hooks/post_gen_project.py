@@ -5,20 +5,21 @@ from forge_cli.utils import get_templated_yaml_loader
 yaml = get_templated_yaml_loader()
 
 # Inject service's config in the config/config.yaml
-with open('../config/config.yaml', 'w+') as f:
+with open('../config/config.yaml', 'r') as f:
     config = yaml.load(f.read())
 
-    config['services']['{{cookiecutter.service_artifact_name}}'] = {
-        "type": "python",
-        "db": {
-            "mongo": True,
-        },
-        "resources": {
-            "cpu": "100m",
-            "memory": "100Mi"
-        }
+config['services']['{{cookiecutter.service_artifact_name}}'] = {
+    "type": "python",
+    "db": {
+        "mongo": True,
+    },
+    "resources": {
+        "cpu": "100m",
+        "memory": "100Mi"
     }
-    
+}
+
+with open('../config/config.yaml', 'w') as f:
     yaml.dump(config, f)
 
 # Move service's directory with its files to project/services
