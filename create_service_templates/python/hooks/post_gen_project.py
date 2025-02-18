@@ -5,7 +5,7 @@ from forge_cli.utils import get_templated_yaml_loader
 yaml = get_templated_yaml_loader()
 
 # Inject service's config in the config/config.yaml
-with open('../config/config.yaml', 'rw') as f:
+with open('../config/config.yaml', 'r+') as f:
     config = yaml.load(f.read())
 
     config['services']['{{cookiecutter.service_artifact_name}}'] = {
