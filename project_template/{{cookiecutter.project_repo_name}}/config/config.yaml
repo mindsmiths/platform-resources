@@ -1,66 +1,446 @@
+# yamllint disable-file
 global:
   dependencies:
     python:
-      - forge-sdk==5.0.9
-      - forge-cli==5.0.10
-      - cecs==5.0.2
+      - forge-sdk==PLACEHOLDER
+      - forge-cli==PLACEHOLDER
       - services/*.py
   env:
-    PROJECT_SLUG: '{{cookiecutter.project_slug}}'
-{% raw %}
+    PROJECT_SLUG: '{{ cookiecutter.project_slug }}'
     LOG_LEVEL: INFO
+{% raw %}
+    ARMORY_SITE_URL: '{{ "https://armory." + env.get("HOST_DOMAIN", "") }}'
+    HOST_DOMAIN: '{{ env.get("HOST_DOMAIN", "") }}'
 
-    # Misc
-    DEFAULT_TIME_ZONE: Europe/Zagreb
-
+    # Cloud storage
+    CLOUD_TYPE: 'AZURE'
+    AZURE_ACCOUNT_URL: '{{ env.AZURE_ACCOUNT_URL }}'
+    AZURE_ACCOUNT_KEY: '{{ env.AZURE_ACCOUNT_KEY }}'
+    AZURE_MEDIA_CONTAINER: '{{ env.AZURE_MEDIA_CONTAINER }}'
+    AZURE_MEDIA_FOLDER: ''
 
   cecs:
-    params: -e venv
+    params: -e *venv* migrations node_modules target .git .idea .vscode dist __pycache__
 
-  repository: nexus.vingd.net
+  repository: mindsmiths.azurecr.io
+
 
 services:
 
-  rule-engine:
-    type: java
-    db:
-      mongo: true
-    resources:
-      cpu: 200m
-      memory: 1350Mi
-
-  heartbeat:
-    package: heartbeat
+  actions:
     type: python
-    version: 5.0.4
-    env:
-      HEARTBEAT_CYCLE: 30
-    db:
-      mongo: true
-    dependencies:
-      - rule-engine-api==5.0.9
-    resources:
-      cpu: 69m
-      memory: 65Mi
-
-  control-panel:
-    type: django
-    version: 0.0.3
-    https: true
-    db:
-      postgres: true
+    version: PLACEHOLDER
     image:
       static: true
     env:
-      DJANGO_SUPERUSER_USERNAME: admin
-      DJANGO_SUPERUSER_PASSWORD: '{{ env.CONTROL_PANEL_ADMIN_PASSWORD | default("admin") }}'
-      SITE_URL: '{{ "control-panel." + env.get("HOST_DOMAIN", "") }}'
-      INTERNAL_SITE_URL: http://control-panel
-      SECRET_KEY: KiOx1YWV1AaDdXmj6PdiFdsXi9iiGUghYskxeUxAQSAEODkB4E
-      REPO: 'https://commit-bot:{{ env.COMMIT_TOKEN }}@{{ env.get("CI_REPOSITORY_URL", "").split("@")[1] }}'
+      CONCURRENCY: 100
+    resources:
+      cpu: 50m
+      memory: 250Mi
+
+  ai_extractor:
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    env:
+      CONCURRENCY: 5
+    resources:
+      cpu: 50m
+      memory: 250Mi
+
+  api_adapter:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    resources:
+      cpu: 50m
+      memory: 50Mi
+
+  armory:
+    type: python
+    version: PLACEHOLDER
+    exposed: true
+    image:
+      static: true
+    env:
+      SITE_URL: '{{ "armory." + env.get("HOST_DOMAIN", "") }}'
+      INTERNAL_SITE_URL: "armory"
+      INTRO_SCREEN: "loader"
+      X_FRAME_OPTIONS: "ALLOW"
+      CORS_ALLOW_ALL_ORIGINS: true
+    resources:
+      cpu: 50m
+      memory: 250Mi
+
+  behavior_analyst:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  business_data_analyst:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 150Mi
+
+  chronos:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 60Mi
+
+  copilot:
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    db:
+      mongo: true
+    env:
+      CONCURRENCY: 10
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  cost_monitor:
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    db:
+      mongo: true
+    env:
+      SMTP_SERVER: "{{ env.NOTIFICATIONS_SMTP_SERVER }}"
+      SMTP_PORT: "{{ env.NOTIFICATIONS_SMTP_PORT }}"
+      SMTP_EMAIL: "{{ env.NOTIFICATIONS_SMTP_FROM_EMAIL }}"
+      SMTP_PASSWORD: "{{ env.NOTIFICATIONS_SMTP_PASSWORD }}"
+      NAMESPACE: "{{ env.NAMESPACE }}"
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  dashboard:
+    type: python
+    exposed: true
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    env:
+      AUTH_SECRET_KEY: "{{ env.AUTH_SECRET_KEY }}"
+      AUTH_2FA_ENABLED: {{ env.AUTH_2FA_ENABLED }}
+      CI_TOKEN: '{{ env.PROJECT_CI_TRIGGER_TOKEN }}'
+      CI_URL: '{{ env.PROJECT_CI_TRIGGER_URL }}'
       BRANCH: '{{ env.CI_COMMIT_BRANCH }}'
-      DATA_HASH: '{{ file_hash("services/control_panel/configuration.yaml") }}'
+      AZURE_MEDIA_CONTAINER: public
+      SUPERUSER_USERNAME: {{ env.SUPERUSER_USERNAME }}
+      SUPERUSER_PASSWORD: {{ env.SUPERUSER_PASSWORD }}
+      SUPERUSER_FIRST_NAME: {{ env.SUPERUSER_FIRST_NAME }}
+      SUPERUSER_LAST_NAME: {{ env.SUPERUSER_LAST_NAME }}
+      SUPERUSER_EMAIL: {{ env.SUPERUSER_EMAIL }}
+      MIN_PASSWORD_LENGTH: {{ env.MIN_PASSWORD_LENGTH }}
+      MIN_PASSWORD_SPECIAL_CHARACTERS: {{ env.MIN_PASSWORD_SPECIAL_CHARACTERS }}
+      MIN_PASSWORD_NUMBERS: {{ env.MIN_PASSWORD_NUMBERS }}
+      MIN_PASSWORD_UPPERCASE: {{ env.MIN_PASSWORD_UPPERCASE }}
+      MIN_PASSWORD_LOWERCASE: {{ env.MIN_PASSWORD_LOWERCASE }}
+      OAUTH_SERVER_REDIRECT_URI: '{{ env.OAUTH_SERVER_REDIRECT_URI }}'
+      GOOGLE_OAUTH_CLIENT_ID: '{{ env.GOOGLE_CLIENT_ID }}'
+      GOOGLE_OAUTH_CLIENT_SECRET: '{{ env.GOOGLE_CLIENT_SECRET }}'
+      SMITH_USER_PASSWORD: "{{ env.SMITH_USER_PASSWORD }}"
+      EMPLOYEE_DATA_URL: "{{ env.EMPLOYEE_DATA_URL }}"
+      EMPLOYEE_DATA_USERNAME: "{{ env.EMPLOYEE_DATA_USERNAME }}"
+      EMPLOYEE_DATA_PASSWORD: "{{ env.EMPLOYEE_DATA_PASSWORD }}"
+      INFOBIP_BASE_URL: "{{ env.INFOBIP_BASE_URL }}"
+      INFOBIP_API_KEY: "{{ env.INFOBIP_API_KEY }}"
+      INFOBIP_PHONE_NUMBER: "{{ env.INFOBIP_PHONE_NUMBER }}"
+      VERTEX_AI_CREDS: '{{ env.VERTEX_AI_CREDS }}'
+    dependencies: []
+#      - config/default_configurations/  # disable static image if uncommenting
+    resources:
+      cpu: 200m
+      memory: 150Mi
+
+  education:
+    type: java
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 200m
+      memory: 1100Mi
+
+  email_adapter:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 400Mi
+
+  escalation_analyst:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 90Mi
+
+  ghostwriter:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  http_adapter:
+    enabled: false
+    exposed: true
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 650Mi
+
+  infobip_adapter:
+    type: python
+    version: PLACEHOLDER
+    exposed: true
+    db:
+      mongo: true
+    env:
+      INFOBIP_BASE_URL: "{{env.INFOBIP_BASE_URL}}"
+      INFOBIP_API_KEY: "{{env.INFOBIP_API_KEY}}"
+      INFOBIP_PHONE_NUMBER: "{{env.INFOBIP_PHONE_NUMBER}}"
+      INFOBIP_ADAPTER_URL: '{{ "https://infobip-adapter." + env.get("HOST_DOMAIN", "") }}'
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 150Mi
+
+  intent_recognizer:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  knowledge_base_manager:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  log_ingestor:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 10m
+      memory: 90Mi
+  
+  moments:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 150Mi
+
+  openai_adapter:
+    type: python
+    version: PLACEHOLDER
+    env:
+      OPENAI_API_KEY: "{{ env.OPENAI_API_KEY }}"
+      CONCURRENCY: 30
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 180Mi
+  
+  planner:
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+
+  python_agent:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 250Mi
+
+  registry:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  relation_manager:
+    type: java
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 200m
+      memory: 1400Mi
+
+  report_generator:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 80Mi
+
+  summarizer:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  telegram_adapter:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    exposed: true
+    https: true
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 400Mi
+
+  test_agent:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    resources:
+      cpu: 500m
+      memory: 500Mi
+
+  text_embedder:
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    env:
+      SEARCH_SCORE_THRESHOLD: -10
     resources:
       cpu: 25m
-      memory: 150Mi
+      memory: 800Mi
+
+  url_shortener:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    exposed: true
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
+
+  weather_adapter:
+    enabled: false
+    type: python
+    version: PLACEHOLDER
+    db:
+      mongo: true
+    image:
+      static: true
+    resources:
+      cpu: 100m
+      memory: 100Mi
+
+  wizard:
+    type: python
+    version: PLACEHOLDER
+    image:
+      static: true
+    resources:
+      cpu: 50m
+      memory: 100Mi
 {% endraw %}

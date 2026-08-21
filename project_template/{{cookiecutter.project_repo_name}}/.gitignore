@@ -1,5 +1,6 @@
 .env
-
+snapshot.json
+*.iml
 *.err
 *.log
 *.swp
@@ -25,3 +26,8 @@ package-lock.json
 secrets
 tags.temp
 target/
+
+*.xlsb
+*.xlsx
+
+scraped_sites

@@ -1,5 +1,6 @@
 {
     "project_name": null,
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-    "project_repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}"
+    "project_repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "project_region_name": null 
 }

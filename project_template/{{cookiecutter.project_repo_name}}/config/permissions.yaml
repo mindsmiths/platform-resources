@@ -1,0 +1,16 @@
+# This file contains mapping of users to their roles on project level.
+# Be careful when editing this file and make sure you are not giving too many permissions to someone!
+# Detailed description of each role can be found at internal docs.
+
+# Available roles: maintainer
+
+# Gitlab maintainer role for this project (can push to main branch and see CI/CD variables on projects)
+# Full access to project deployment on 'production' and 'sandbox' deployments
+# Full access to azure storage accounts for this project
+maintainer: []
+
+
+# Gitlab developer role for this project (can't push to main branch and can't see CI/CD variables on projects)
+# Limited access to project deployment on 'production' and full access to 'sandbox' deployments
+# No access to azure storage accounts for this project
+dev: []

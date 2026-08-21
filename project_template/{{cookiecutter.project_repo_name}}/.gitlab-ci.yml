@@ -1,5 +1,12 @@
 include:
   - project: mindsmiths/companions/companions-deploy
-    ref: v5.x
+    ref: v8.x
     file:
       - standard.yml
+
+variables:
+  PRODUCTION_NODE_COUNT: "2"
+  PRODUCTION_CLUSTER_NAME: "{{ cookiecutter.project_region_name }}"
+  SECURE_PULSAR: "true"
+  PRODUCTION_PULSAR_INSTANCE_NAME: "{{ cookiecutter.project_region_name }}-pulsar2"
+  SANDBOX_PULSAR_INSTANCE_NAME: "ms-sandbox-2-pulsar3"

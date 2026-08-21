@@ -1,5 +1,0 @@
-services:
-
-  rule-engine:
-    env:
-      JDK_JAVA_OPTIONS: -XX:MaxHeapSize=400M

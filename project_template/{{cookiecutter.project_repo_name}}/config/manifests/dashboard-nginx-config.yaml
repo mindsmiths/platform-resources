@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-nginx-config
+data:
+  nginx.conf: |
+    gzip on;
+    gzip_comp_level 6;
+    gzip_min_length 256;
+    gzip_proxied any;
+    gzip_vary on;
+    gzip_types
+    text/plain
+    text/css
+    text/javascript
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/xhtml+xml
+    application/rss+xml
+    application/atom+xml
+    image/svg+xml;
+    gzip_http_version 1.1;
+
+    server_names_hash_bucket_size 128;
+    server_names_hash_max_size 4096;
+
+    client_max_body_size 50M;
+    client_body_buffer_size 16k;
+
+    upstream channels-backend {
+        server 127.0.0.1:8000;
+    }
+    server {
+        listen 80;
+        server_name _;
+        charset utf-8;
+        root  /var/www/assets;
+        index index.html;
+        access_log /dev/stdout;
+        error_log /dev/stderr;
+
+        location /api {
+            proxy_set_header   X-Forwarded-For $remote_addr;
+            proxy_set_header   Host $http_host;
+            proxy_pass         "http://127.0.0.1:8000";
+        }
+
+        location /api/ws/socket.io/ {
+            proxy_pass http://channels-backend;
+
+            proxy_http_version  1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Host $server_name;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html =404;
+        }
+    }

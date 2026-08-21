@@ -1,12 +1,31 @@
+# yamllint disable-file
 {% raw -%}
 global:
   env:
-    INTERNAL_CONTROL_PANEL_URL: '{{ env.CONTROL_PANEL_URL | default("http://localhost:8100", true) }}'
+    ARMORY_SITE_URL: '{{ env.ARMORY_SITE_URL | default("http://localhost:8000", true) }}'
 
 services:
 
-  control-panel:
-    port: 8100
+  api_adapter:
+    enabled: true
+    port: 8008
+
+  armory:
     env:
-      SITE_URL: '{{ env.CONTROL_PANEL_URL | default("http://localhost:8100", true) }}'
+      SITE_URL: '{{ env.ARMORY_SITE_URL | default("http://localhost:8000", true) }}'
+    port: 8000
+
+  dashboard:
+    env:
+      SITE_URL: '{{ env.DASHBOARD_SITE_URL | default("http://localhost:8001", true) }}'
+    port: 8001
+
+  infobip_adapter:
+    env:
+      INFOBIP_BASE_URL: "https://r529vy.api.infobip.com/"
+      INFOBIP_PHONE_NUMBER: '{{ env.INFOBIP_PHONE_NUMBER | default("385997828570", true) }}'
+    port: 8002
+
+  python_agent:
+    enabled: true
 {% endraw %}

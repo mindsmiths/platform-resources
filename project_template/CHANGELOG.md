@@ -1,6 +1,19 @@
 # Project template CHANGELOG
 
 
+## [1.7.2] - 2024-05-14
+
+### Added
+- variable for Smith dashboard auth
+
+
+## [1.7.1] - 2024-05-14
+
+### Changed
+- added armory-nginx-config.yaml to manifests
+- added gzip functionality to armory-nginx
+- added yamllint idisable-file functionality for local.config.yaml and config.yaml files
+
 ## [1.6.1] - 2023-04-25
 
 ### Changed

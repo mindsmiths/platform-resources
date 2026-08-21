@@ -1,10 +1,19 @@
-# Hi, I'm {{cookiecutter.project_name}}!
+# Hi, I'm {{ cookiecutter.project_name }}!
 
-# Are we doing this or what?
-TODO
+## Setup
 
-## Prerequisites
-To set the initial state of the project just run `forge init`. This will install prerequisites and build the project.
+### Install dependencies
+To setup, run:
+```bash
+pip install forge-cli
+```
 
-## Get ready to rumble!
-To start playing, just run `forge run`.
+### Init project
+```bash
+forge init
+```
+
+## Run project
+```bash
+forge run
+```

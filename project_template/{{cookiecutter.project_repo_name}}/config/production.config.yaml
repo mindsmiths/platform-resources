@@ -3,15 +3,6 @@ global:
     mongo:
       enabled: true
       cron: 3 5,17 * * *
-    postgres:
-      enabled: true
-      cron: 8 5,17 * * *
     redis:
       enabled: true
       cron: 13 5,17 * * *
-
-services:
-
-  rule-engine:
-    env:
-      JDK_JAVA_OPTIONS: -XX:MaxHeapSize=400M
